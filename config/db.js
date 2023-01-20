@@ -1,4 +1,4 @@
-const moongoose = require("mongoose");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 const DB_URI = process.env.MONGO_URI;
@@ -9,11 +9,15 @@ const MONGO_OPTIONS = {
 
 const connectDB = async () => {
   try {
-    await moongoose.connect(DB_URI, MONGO_OPTIONS);
+    mongoose.set("strictQuery", true);
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("mongoDB connected");
   } catch (error) {
     console.log("DB failed", error);
-    process.exit()
+    process.exit();
   }
 };
 module.exports = { connectDB };
