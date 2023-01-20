@@ -11,6 +11,7 @@ const eventRoutes = require("./routes/eventRoutes");
 require("dotenv").config();
 connectDB();
 app.set(cors());
+app.use(express.json());
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/schedule", scheduleRoutes);
